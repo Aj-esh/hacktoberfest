@@ -14,8 +14,8 @@ class Queue {
     Queue(int capacity = 10) {
         this->capacity = capacity;
         sz = 0;
-        head = -1;
-        tail = -1;
+        head = 0;
+        tail = 0;
         arr = new T[capacity];
     }
 
@@ -28,14 +28,14 @@ class Queue {
     }
 
     bool full() {
-        return tail == capacity;
+        return sz == capacity;
     }
 
     void resize(int cap) {
         if(cap < 1) cap = 1;
         T* narr = new T[cap];
 
-        for(int i=head; i<tail; i++) 
+        for(int i=0; i<sz; i++) 
             narr[i] = arr[(head + i) % capacity];
         delete []arr;
         arr = narr;
@@ -69,8 +69,8 @@ class Queue {
     }
 
     void display() {
-        for(int i=head; i<=tail; i++) {
-            cout << arr[i] << " ";
+        for(int i=0; i<sz; i++) {
+            cout << arr[(head + i) % capacity] << " ";
         }
         cout << endl;
     }
